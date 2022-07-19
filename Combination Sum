@@ -1,0 +1,21 @@
+class Solution {
+public:
+    vector<vector<int> >ans;
+    void generate(int i,vector<int>&temp,vector<int>&nums,int target){//base case
+        if(i==nums.size()) return;
+        if(target==0){
+            ans.push_back(temp);
+            return;
+        }
+        if(target<0) return;
+        generate(i+1,temp,nums,target);
+        temp.push_back(nums[i]);
+        generate(i,temp,nums,target-nums[i]);
+        temp.pop_back();
+    }
+    vector<vector<int>> combinationSum(vector<int>&nums, int target) {
+        vector<int>temp;
+generate(0,temp,nums,target);
+        return ans;
+    }
+};
