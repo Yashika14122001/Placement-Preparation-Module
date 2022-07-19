@@ -1,0 +1,41 @@
+class Solution {
+public:
+    set<vector<int>>s;
+    vector<vector<int>>ans;
+    void generate(int i, vector<int> &temp,vector<int>& nums, int target){
+      if(i==nums.size()){
+        if(target==0){
+            s.insert(temp);
+        } 
+          return;
+      }
+        if(target==0) {
+            s.insert(temp);
+            return;
+        }
+        if(target<0) return;
+        generate(i+1, temp, nums,target);
+        temp.push_back(nums[i]);//5push
+         generate(i+1,temp, nums,target-nums[i]);//0 target
+        temp.pop_back();//5 include nhi ho paya 
+    }
+    vector<vector<int>> combinationSum2(vector<int>& num, int target) {
+        vector<int>nums;
+        map<int,int>h;
+        for(int i=0;i<num.size();i++){
+            if(h[num[i]]<30) {h[num[i]]++;
+            nums.push_back(num[i]);}
+        }int ss=0;
+        for(int i=0;i<nums.size();i++){
+            ss=ss+nums[i];
+        }
+        if(ss==target) {ans.push_back(nums);
+            return ans;}
+        sort(nums.begin(),nums.end());
+        vector<int> temp;
+        generate(0,temp,nums,target);
+        for(auto x: s)
+            ans.push_back(x);
+       return ans; 
+    }
+};
