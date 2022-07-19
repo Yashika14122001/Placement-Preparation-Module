@@ -1,0 +1,15 @@
+class Solution {
+public:
+    int longestConsecutive(vector<int>& nums) {
+if(nums.size()==0) return 0;
+    sort(nums.begin(),nums.end());
+        int longest=0;
+        int curlongest=1;
+        for( int i=1;i<nums.size();i++){
+            if(nums[i-1]==nums[i]) continue;
+            else if(nums[i]-nums[i-1]==1)curlongest++;
+            else {longest= max(longest,curlongest) ;
+            curlongest=1;}
+        }
+        
+        return max(longest,curlongest);}};
