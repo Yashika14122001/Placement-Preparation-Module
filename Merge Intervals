@@ -1,0 +1,22 @@
+class Solution {
+public:
+    vector<vector<int>> merge(vector<vector<int>>& in) {
+        sort(in.begin(),in.end());//aage k digit k acc sort kr do
+        vector<vector<int>> ans;
+         if(in.size()==0) return ans;
+        vector<int> v= in[0];
+        for(int i=1;i<in.size();i++)   {
+        if(in[i][0] > v[1]) {
+            ans.push_back(v);
+            v= in[i];
+        }
+            else {
+                v[1]= max(in[i][1] , v[1]);
+            }}
+            ans.push_back(v);
+     
+        return ans;
+    }
+};
+  
+       
