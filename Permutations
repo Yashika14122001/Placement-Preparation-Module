@@ -1,0 +1,25 @@
+class Solution {
+public:
+    vector<vector<int>> permute(vector<int>& nums) {
+        vector<vector<int>>ans;
+        sort(nums.begin(),nums.end());
+        do{
+            ans.push_back(nums);
+        }while(next_permutation(nums.begin(),nums.end()));
+        return ans;
+    }
+};
+// vector<vector<int>>allpermuatation;
+//     void generate(vector<int>& nums,int idx){
+//       if(i==nums.size())  {
+//           allpermutation.push_back(nums);
+//           return;
+//       }
+//         for(int i=idx;i<nums.szie();i++){
+//             swap(nums[i],nums[idx]);
+//             generate(nums,idx+1);
+//              swap(nums[i],nums[idx]);
+//         }
+//     vector<vector<int>> permute(vector<int>& nums) {
+//         generate(nums,0);
+//         return allpermutation;
