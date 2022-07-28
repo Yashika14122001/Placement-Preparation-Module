@@ -1,0 +1,87 @@
+class Solution
+{
+    public:
+    //Function to add two numbers represented by linked list.
+    struct Node* reverse(Node* &head){
+        struct Node* prev=NULL;
+        struct Node* curr= head;
+        struct Node* nextp;
+        while(curr!=NULL){
+            nextp= curr->next;
+            curr->next= prev;
+            prev= curr;
+            curr= nextp;
+        }
+        return prev;
+    }
+    int length(struct Node* head){
+        int co=0;
+        struct Node* temp=head;
+        while(temp!=NULL){
+            temp=  temp->next;
+            co++;
+        }
+        return co;
+    }
+    struct Node* addTwoLists(struct Node* first, struct Node* second)
+    {
+        // code here
+          if(length(first) <length(second)){
+            struct Node* temp= first;
+        first= second;
+        second=temp;
+            }
+            struct Node* f= reverse(first);
+            struct Node* f1=f;
+            struct Node* s= reverse(second);
+            struct Node* s1=s; 
+            struct Node* prev=NULL;
+            
+            int carry=0;
+            while(f1!=NULL || s1!=NULL){
+                int fd=0,sd=0;
+                if(f1==NULL){
+                    fd=0;
+                }
+                else fd= f1->data;
+                if(s1==NULL){
+                    sd=0;
+                }
+                else sd= s1->data;
+                int sum= sd+fd+carry;
+                carry= sum/10;
+                f1->data=sum%10;
+                prev= f1;
+                f1= f1->next;
+                if(s1!=NULL) s1=s1->next;
+            }
+        if(carry==1){
+            struct Node* newnode= new Node(1);
+            prev->next= newnode;
+        }
+        return reverse(f);
+    }
+};
+
+
+//{ Driver Code Starts.
+
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int n, m;
+        
+        cin>>n;
+        Node* first = buildList(n);
+        
+        cin>>m;
+        Node* second = buildList(m);
+        Solution ob;
+        Node* res = ob.addTwoLists(first,second);
+        printList(res);
+    }
+    return 0;
+}
