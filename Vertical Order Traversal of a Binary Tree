@@ -1,0 +1,25 @@
+ vector<vector<int>> verticalTraversal(TreeNode* root) {
+        map<int, map<int,multiset<int>>> m;//first int for vertical & in second //map int for level & multi for node coz if two nodes have same key then koi //problem n ho 
+      queue<pair<TreeNode* ,pair<int,int>>>q;//node,ver,lev
+        q.push({root,{0,0}});
+        while(!q.empty()){
+            auto t= q.front();
+            q.pop();
+            TreeNode* node = t.first;
+            int x= t.second.first ,y= t.second.second;
+            m[x][y].insert(node->val);
+            if(node->left!=NULL) q.push({node->left,{x-1,y+1}});
+              if(node->right!=NULL) q.push({node->right,{x+1,y+1}});
+        }
+        vector<vector<int>> ans;
+        for(auto p:m){
+            vector<int> col;
+            for(auto t:p.second){
+                for(auto x:t.second){
+                col.push_back(x);
+            }}
+            ans.push_back(col);
+        }
+        return ans;
+    }
+};
